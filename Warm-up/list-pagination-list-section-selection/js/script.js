@@ -35,24 +35,21 @@ const perPage = 2;
 function sectionSelection ( list, section ){
   const startIndex = (section * perPage) - perPage;
   const endIndex = (section * perPage);
-    // 1b. Loop over the list parameter and set the style.color of each list[i] item to 'whitesmoke'
-  for (let i=0; i<list.length; i++){
-    list[i].style.color = 'whitesmoke'
-  };
+    // 1b. Loop over the list parameter and set the style.color of each list[i] item to 'whitesmoke'    
   for (let i=0; i<list.length; i++){
     if ( i >= startIndex && i < endIndex ){
-      list[i].style.color = 'salmon'
+      list[i].style.color = 'salmon';
     } else {
-
+      list[i].style.color = 'whitesmoke';
+    };
     };
   };
-};
+
   // 1c. Loop over the list parameter again
       // Add a conditional inside the loop
       // If the `i` is >= the `startIndex` variable && the `i` < the `endIndex` variable
         // Set the style.color of the the list[i] item to 'green', or your favorite color
 
-sectionSelection ();
 
 
 
@@ -64,7 +61,8 @@ sectionSelection ();
  */
 
 /* btn1 listener */
-btn1.addEventListener('click', () => {
+btn1.addEventListener('click', (e) => {
+  sectionSelection (listItems, 1);
 
   // Invoke your sectionSelection function here - Arguments: listItems, 1
 
@@ -75,6 +73,7 @@ btn1.addEventListener('click', () => {
 
 /* btn2 listener */
 btn2.addEventListener('click', () => {
+  sectionSelection (listItems, 2);
 
   // Invoke your sectionSelection function here - Arguments: listItems, 2
 
@@ -87,6 +86,7 @@ btn2.addEventListener('click', () => {
 btn3.addEventListener('click', () => {
 
   // Invoke your sectionSelection function here - Arguments: listItems, 3
+  sectionSelection (listItems, 3);
 
   // Helpful log statement to test function
   console.log('Third button is functional!');
