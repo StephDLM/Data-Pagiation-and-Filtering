@@ -44,7 +44,7 @@ const value4 = [value1, value2, value3]
   // 1a. Set the `style.color` property of `element1` to green, or your favorite color
   // 1b. Set the `innerHTML` property of `element1` equal to the `number` parameter
   function func1 (number){
-    element1.style.color = purple
+    element1.style.color = 'purple'
     element1.innerHTML = number
   };
 
@@ -54,7 +54,7 @@ const value4 = [value1, value2, value3]
   // 2a. Set the `style.color` property of `element2` to green, or your favorite color
   // 2b. Set the `innerHTML` property of `element2` equal to the `string` parameter
   function func2 (string){
-    element2.style.color = green
+    element2.style.color = 'green'
     element2.innerHTML = string
   };
 
@@ -64,7 +64,7 @@ const value4 = [value1, value2, value3]
   // 3a. Set the `style.color` property of `element3` to green, or your favorite color
   // 3b. Set the `innerHTML` property of `element3` equal to the `element` parameter
   function func3 (element){
-    element3.style.color = skyblue
+    element3.style.color = 'skyblue'
     element3.innerHTML = element
   };
 
@@ -77,10 +77,10 @@ const value4 = [value1, value2, value3]
     // 4cc. For each loop iteration, concatenate `array[i]` to the `myString` variable you created above
   // 4d. Set the `innerHTML` of `element4` equal to the `myString`
   function func4 (array){
-    element4.style.color = salmon
-    const myString = '';
+    element4.style.color = 'salmon'
+    let myString = '';
     for (let i=0; i<array.length; i++) {
-      //array[i].myString
+      myString += array[i]
     }
     element4.innerHTML = myString
   };
