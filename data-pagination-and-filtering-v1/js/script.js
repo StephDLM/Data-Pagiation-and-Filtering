@@ -20,7 +20,7 @@ Create a parameter with the class of '.student-list', and set it equal to an emp
 function showPage(list, page) {
    const studentList = document.querySelector(".student-list")
    studentList.innerHTML = '';
-//create 2 variables that will make only  students appear on one page.
+//create 2 variables that will make only 9 students appear on one page.
 //Then, loop this so it will repeat it through the entire list
     for (let i=0; i < list.length; i++ ){
       const startIndex = page * 9 - 9;
@@ -50,25 +50,34 @@ function showPage(list, page) {
 showPage(data, 1);
 
 //Create the `addPagination` that will insert the elements needed for the pagination buttons
+//Create variables that provide number of pages based on list length and what selects link list
 
 function addPagination (list){
    const numOfPages = Math.ceil(list.length / 9);
    const linkList = document.querySelector('.link-list');
    linkList.innerHTML = '';
+//Create a loop that will create a button for every page for the list 
    for (let i=1; i <= numOfPages; i++){
       let button = `
          <li>
          <button type="button">${i}</button>
          </li>
         `;
+//insert the DOM element
         linkList.insertAdjacentHTML('beforeend', button);
       }
-   let firstButton = linkList.querySelector('button','active');
-   linkList.addEventListener('click', (e) =>{
-      if (e.target.tagName === 'BUTTON'){
-         let buttonClicked = document.querySelector('.active') 
-         e.target.classList.add ('active');
-         showPage (list, e.target.textContent);
+      //create a variable that adds active class to the first button
+      let firstButton = linkList.querySelector('button','active');
+/*
+Create an eventListener that will be become active when the button is clicked
+Use 
+*/
+      linkList.addEventListener('click', (e) =>{
+         if (e.target.tagName === 'BUTTON'){
+            let buttonClicked = document.querySelector('.active') 
+            buttonClicked = '';
+            e.target.classList.add ('active');
+            showPage (list, e.target.textContent);
 
       }
    })
