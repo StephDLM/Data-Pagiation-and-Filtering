@@ -49,6 +49,8 @@ function showPage(list, page) {
 };
 showPage(data, 1);
 
+
+
 //Create the `addPagination` that will insert the elements needed for the pagination buttons
 //Create variables that provide number of pages based on list length and what selects link list
 
@@ -77,6 +79,7 @@ Use
             let buttonClicked = document.querySelector('.active') 
             buttonClicked = '';
             e.target.classList.add ('active');
+            e.target.classList.remove ('active');
             showPage (list, e.target.textContent);
 
       }
