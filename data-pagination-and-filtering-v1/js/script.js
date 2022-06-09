@@ -23,15 +23,15 @@ function showPage(list, page) {
    studentList.innerHTML = '';
 
    for (let i=0; i < list.length; i++ ){
-      const startIndex = page * 9 - 9
-      const endIndex = page * 9
+      const startIndex = page * 9 - 9;
+      const endIndex = page * 9;
    
    
    
       // loop over the length of the `list` parameter
-      for (let i=0; i < list.length; i++){
+    
       if (i >= startIndex && i < endIndex) {
-         const studentItem = 
+         let studentItem = 
          `
          <li class=student-item cf}>
          <div class="student-details">
@@ -43,13 +43,13 @@ function showPage(list, page) {
            <span class="date">Joined ${list[i].registered.date}</span>
          </div>
        </li> 
-        `
+        `;
         studentList.insertAdjacentHTML('beforeend', studentItem);
 
-      }
-   };    
+      
+   }
 }
-}
+};
 showPage(data, 1);
 
 /*
