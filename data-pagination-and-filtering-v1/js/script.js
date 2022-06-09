@@ -13,25 +13,19 @@ For assistance:
 
 
 console.log(data);
-// let itemsPerPage = 9
 /*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
+Create the `showPage` function that accepts the parameters list and page which will create and insert the elements needed to display a "page" of nine students
+Create a parameter with the class of '.student-list', and set it equal to an empty string to remove student previously displayed
 */
 function showPage(list, page) {
    const studentList = document.querySelector(".student-list")
-   console.log(studentList);
-
    studentList.innerHTML = '';
-
-   for (let i=0; i < list.length; i++ ){
+//create 2 variables that will make only  students appear on one page.
+//Then, loop this so it will repeat it through the entire list
+    for (let i=0; i < list.length; i++ ){
       const startIndex = page * 9 - 9;
       const endIndex = page * 9;
-   
-   
-   
-      // loop over the length of the `list` parameter
-    
+//make a conditional statement that tests if the index is between 1-8. The, create the DOM element to display the students    
       if (i >= startIndex && i < endIndex) {
          let studentItem = 
          `
@@ -44,20 +38,19 @@ function showPage(list, page) {
          <div "joined-details">
            <span class="date">Joined ${list[i].registered.date}</span>
          </div>
-       </li> 
+         </li> 
         `;
+        //insert the DOM element into the DOM using insertAdjacentHTML
         studentList.insertAdjacentHTML('beforeend', studentItem);
 
       
+      };
    };
-};
 };
 showPage(data, 1);
 
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+//Create the `addPagination` that will insert the elements needed for the pagination buttons
+
 function addPagination (list){
    const numOfPages = Math.ceil(list.length / 9);
    const linkList = document.querySelector('.link-list');
@@ -69,19 +62,17 @@ function addPagination (list){
          </li>
         `;
         linkList.insertAdjacentHTML('beforeend', button);
-   }
+      }
    let firstButton = linkList.querySelector('button','active');
    linkList.addEventListener('click', (e) =>{
       if (e.target.tagName === 'BUTTON'){
          let buttonClicked = document.querySelector('.active') 
          e.target.classList.add ('active');
-         e.target.classList.remove ('active');
          showPage (list, e.target.textContent);
 
       }
-   
-})
-}
+   })
+};
 
 // Call functions
 
