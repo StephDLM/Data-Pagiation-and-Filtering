@@ -25,7 +25,7 @@ function showPage(list, page) {
     for (let i=0; i < list.length; i++ ){
       const startIndex = page * 9 - 9;
       const endIndex = page * 9;
-//make a conditional statement that tests if the index is between 1-8. The, create the DOM element to display the students    
+//make a conditional statement that tests if the index is between 1-8. Then, create the DOM element to display the students    
       if (i >= startIndex && i < endIndex) {
          let studentItem = 
          `
@@ -41,52 +41,94 @@ function showPage(list, page) {
          </li> 
         `;
         //insert the DOM element into the DOM using insertAdjacentHTML
-        studentList.insertAdjacentHTML('beforeend', studentItem);
-
-      
+      studentList.insertAdjacentHTML('beforeend', studentItem);
       };
    };
 };
-showPage(data, 1);
 
-
-
-//Create the `addPagination` that will insert the elements needed for the pagination buttons
+//Create ta function that will insert the elements needed for the pagination buttons
 //Create variables that provide number of pages based on list length and what selects link list
-
 function addPagination (list){
    const numOfPages = Math.ceil(list.length / 9);
    const linkList = document.querySelector('.link-list');
    linkList.innerHTML = '';
+
 //Create a loop that will create a button for every page for the list 
    for (let i=1; i <= numOfPages; i++){
-      let button = `
-         <li>
+      const button = 
+         `<li>
          <button type="button">${i}</button>
-         </li>
-        `;
+         </li>`;
 //insert the DOM element
-        linkList.insertAdjacentHTML('beforeend', button);
-      }
-      //create a variable that adds active class to the first button
-      let firstButton = linkList.querySelector('button','active');
+      linkList.insertAdjacentHTML('beforeend', button);
+//create a variable that represents the first button and select it's active class
+      let firstButton = document.querySelector('li button');
+      firstButton.className = 'active';
+   };
 /*
 Create an eventListener that will be become active when the button is clicked
-Use 
-*/
+If clicked, use existing active button to get rid of active class */
       linkList.addEventListener('click', (e) =>{
          if (e.target.tagName === 'BUTTON'){
-            let buttonClicked = document.querySelector('.active') 
-            buttonClicked = '';
-            e.target.classList.add ('active');
-            e.target.classList.remove ('active');
+            let active_button = document.querySelector('.active'); 
+            active_button.className = '';
+            e.target.className ='active';
             showPage (list, e.target.textContent);
-
-      }
-   })
-};
-
-// Call functions
-
+         }
+      });
+   }
+//call functions to make data appear in each page 
 showPage(data, 1);
 addPagination(data);
+
+//Create a search bar and add the class list 
+const header = document.querySelector('header');
+const studentList = document.createElement('label');
+//studentList.textContent = 'Search'
+studentList.classList.add('.student-search')
+studentList.innerHTML= 
+   `<label for="search" class="student-search">
+   <span>Search by name</span>
+   <input id="search" placeholder="Search by name...">
+   <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+   </label>`;
+//append the form to the header
+header.appendChild(studentList);
+
+//Make an event listener for the inputs 
+header.addEventListener("keyup", (e) => {
+   let input = e.value
+   if(search.value.length != 0) {
+      searchComponent(search, data);
+   } else {
+      showPage(data, 1)
+      addPagination(data);
+ // console.log(e.target.value)
+//call the function in EventListener
+searchComponent (input, data);
+
+   }})
+
+//function that will input 2 parameters, one for the input value and the other to access the list data
+function searchComponent (input, list){
+   let newList = [];
+// for loop that goes through list and meets the conditions to find student
+   for ( let i=0; i<list.length; i++ ){
+      const firstInput = list[i].name.first
+      const secondInput = list[i].name.last
+      
+     // console.log(list[i]);      
+      if ( firstInput.includes(input) && secondInput.includes(input) ){
+         newList.push(list[i]);
+             }
+      }
+     
+showPage(newList, 1);
+addPagination(newList);
+searchComponent(input, data);
+
+
+};
+
+
+
