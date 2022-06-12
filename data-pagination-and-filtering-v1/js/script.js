@@ -81,54 +81,60 @@ If clicked, use existing active button to get rid of active class */
 showPage(data, 1);
 addPagination(data);
 
-//Create a search bar and add the class list 
+//Create a search bar and add the class list. Use the document query selector to select the first item from the header
 const header = document.querySelector('header');
+//Create a label element that contains the student list- this will allow the search button to look for students 
 const studentList = document.createElement('label');
 //studentList.textContent = 'Search'
+//Add the class list for the student list 
 studentList.classList.add('.student-search')
-studentList.innerHTML= 
+//Insert the html that will show in the search bar to the studentList label 
+studentList.innerHTML =
    `<label for="search" class="student-search">
    <span>Search by name</span>
    <input id="search" placeholder="Search by name...">
    <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
    </label>`;
-//append the form to the header
+//append the studentList to header
 header.appendChild(studentList);
+// header.insertAdjacentHTML('beforeend', inputValue);
 
-//Make an event listener for the inputs 
-header.addEventListener("keyup", (e) => {
-   let input = e.value
-   if(search.value.length != 0) {
-      searchComponent(search, data);
-   } else {
-      showPage(data, 1)
-      addPagination(data);
- // console.log(e.target.value)
-//call the function in EventListener
-searchComponent (input, data);
-
-   }})
 
 //function that will input 2 parameters, one for the input value and the other to access the list data
 function searchComponent (input, list){
    let newList = [];
 // for loop that goes through list and meets the conditions to find student
-   for ( let i=0; i<list.length; i++ ){
-      const firstInput = list[i].name.first
-      const secondInput = list[i].name.last
+   for ( let i=0; i < list.length; i++ ){
+      let firstInput = list[i].name.first.toLowerCase();
+      let secondInput = list[i].name.last.toLowerCase();
       
      // console.log(list[i]);      
-      if ( firstInput.includes(input) && secondInput.includes(input) ){
+      if ( firstInput.includes(input.value.toLowerCase()) || secondInput.includes(input.value.toLowerCase()) ){
          newList.push(list[i]);
+
              }
       }
      
 showPage(newList, 1);
 addPagination(newList);
-searchComponent(input, data);
-
-
 };
+
+//Add an event listener to the header for each input 
+search.addEventListener("keyup", () => {
+//Create a conditional statement that shoes if the value is not 0, use the function SearchComponent, and if there is not input, show the list of students on the page
+   if(search.value.length != 0) {
+      searchComponent(search, data);
+   } else {
+      showPage(data, 1)
+      addPagination(data);
+//call the function in EventListener
+//searchComponent (search, data);
+// console.log(search);
+
+
+   }})
+
+
 
 
 
