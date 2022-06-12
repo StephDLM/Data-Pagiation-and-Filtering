@@ -3,15 +3,6 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-
-
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-
 console.log(data);
 /*
 Create the `showPage` function that accepts the parameters list and page which will create and insert the elements needed to display a "page" of nine students
@@ -85,7 +76,6 @@ addPagination(data);
 const header = document.querySelector('header');
 //Create a label element that contains the student list- this will allow the search button to look for students 
 const studentList = document.createElement('label');
-//studentList.textContent = 'Search'
 //Add the class list for the student list 
 studentList.classList.add('.student-search')
 //Insert the html that will show in the search bar to the studentList label 
@@ -97,10 +87,8 @@ studentList.innerHTML =
    </label>`;
 //append the studentList to header
 header.appendChild(studentList);
-// header.insertAdjacentHTML('beforeend', inputValue);
 
-
-//function that will input 2 parameters, one for the input value and the other to access the list data
+//function that will search for names using 2 parameters, one for the input value and the other to access the list data
 function searchComponent (input, list){
    let newList = [];
 // for loop that goes through list and meets the conditions to find student
@@ -112,12 +100,14 @@ function searchComponent (input, list){
 //create a conditional statement that checks if 2 the inputs are a value in the data, then add to the new array
       if ( firstInput.includes(input.value.toLowerCase()) || secondInput.includes(input.value.toLowerCase()) ){
          newList.push(list[i]);
-
-          }
+          }  
+         
       }
+
 //call functions
 showPage(newList, 1);
 addPagination(newList);
+notFound(newList);
 };
 
 //Add an event listener to the header for each input 
@@ -128,13 +118,27 @@ search.addEventListener("keyup", () => {
    } else {
       showPage(data, 1)
       addPagination(data);
-//call the function in EventListener
-//searchComponent (search, data);
-// console.log(search);
-
 
    }})
 
+  //variable that selects the h3 element to display no results
+   const h3 = document.createElement('h3');
+   //add values to the className, style.display, and textContent on the h3 element that will display no-results 
+   h3.className = 'not-found';
+   h3.style.display = 'none';
+   h3.textContent = "no results found";
+   //insert the h3 element AFTER the search box on the header
+   header.insertAdjacentElement("afterend", h3);
+
+   /*function to display parts of the new h3 element on the screen 
+   by creating a conditional statement that tests to see if nothing is input (length is exactly 0), it displays nothing
+   otherwise, displays the text content under 'none'*/
+   function notFound (list){
+      if (list.length === 0) {
+        h3.style.display = '';
+      } else {
+         h3.style.display = 'none';      }
+     };
 
 
 
