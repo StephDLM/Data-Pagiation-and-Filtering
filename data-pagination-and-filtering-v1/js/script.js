@@ -108,13 +108,14 @@ function searchComponent (input, list){
       let firstInput = list[i].name.first.toLowerCase();
       let secondInput = list[i].name.last.toLowerCase();
       
-     // console.log(list[i]);      
+//console.log(list[i]);   
+//create a conditional statement that checks if 2 the inputs are a value in the data, then add to the new array
       if ( firstInput.includes(input.value.toLowerCase()) || secondInput.includes(input.value.toLowerCase()) ){
          newList.push(list[i]);
 
-             }
+          }
       }
-     
+//call functions
 showPage(newList, 1);
 addPagination(newList);
 };
